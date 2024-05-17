@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Dependencies') {
+       /* stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
-        }
+        }*/
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'docker build -t my-angular-app .'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Add your deployment steps here
+                sh 'docker run -d -p 6500:6500 my-node-app'
             }
         }
     }
